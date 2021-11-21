@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
     "common",
     "news",
 ]
@@ -158,3 +159,5 @@ LOGOUT_REDIRECT_URL = "/"
 
 NAVER_API_ID = get_secret("NAVER_API_ID")
 NAVER_API_SECRET = get_secret("NAVER_API_SECRET")
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"

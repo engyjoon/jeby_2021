@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import FormView
-from .forms import NewsSearchForm
-from .utils import naverapi_utils as naver_api
+from ..forms import NewsSearchForm
+from ..utils import naverapi_utils as naver_api
 
 
 @login_required(login_url="common:login")
