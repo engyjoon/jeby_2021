@@ -5,6 +5,7 @@ from dateutil.parser import parse
 from datetime import timedelta
 from django.conf import settings
 from django.utils import timezone
+from ..models import Site
 
 
 def call(keyword, display=10, start=1, sort="date"):
@@ -48,6 +49,8 @@ def get_news(keyword, start_time=None, end_time=None):
     start = 1
     display = 100
 
+    sites = Site.objects.all()
+
     result = []
     flag = True
     while flag:
@@ -84,6 +87,12 @@ def get_news(keyword, start_time=None, end_time=None):
                 if m is not None:
                     uri = m.group(1)
                     news["siteuri"] = uri
+
+                    try:
+                        news["sitename"] = sites.get(address=uri)
+                        news["siteid"] = sites.get(address=uri).pk
+                    except Site.DoesNotExist:
+                        news["sitename"] = ""
                 else:
                     print("URI 추출 실패")
                     print(f'originallink : {news.get("originallink")}')
