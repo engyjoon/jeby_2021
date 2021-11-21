@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from ..models import Keyword
 from ..forms import NewsSearchForm
 from ..utils import naverapi_utils as naver_api
 
@@ -19,6 +20,7 @@ def news_search(request):
     """
 
     news_list = None
+    keywords = Keyword.objects.all()
 
     if request.method == "GET":
         if len(request.GET):
@@ -37,5 +39,5 @@ def news_search(request):
     return render(
         request,
         "news/news_search.html",
-        {"form": form, "news_list": news_list},
+        {"form": form, "news_list": news_list, "keywords": keywords},
     )
